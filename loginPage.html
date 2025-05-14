@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/loginPage.css">
+    <title>Login</title>
+    
+</head>
+<body>
+
+    <!-- A container for login menu  -->
+    <div id="container"> <!--Display style should be flexed, all elements within will inherit flex style-->
+        <div id = "login-container">
+            <h1>LOGIN</h1> <!--Subjected to change--- change to Register-->
+            <!--container to hold the input boxes-->
+            <div id="inputFields">
+                <!--Register Input Field-->
+                <input type = "text" placeholder="username" class="registerInput">
+                <input type = "text" placeholder="email" class="registerInput">
+                <input type = "text" placeholder="password" class="registerInput">
+                <input type = "text" placeholder="confirm password" class="registerInput">
+                <input type = "radio" name="userType" value="student" class="registerInput">
+                <label for="student" class="registerInput">Student</label>
+                <input type = "radio" name="userType" value="teacher" class="registerInput">
+                <label for="teacher" class="registerInput">Teacher</label>
+                <input type = "radio" name="userType" value="none" class="registerInput"> 
+                <label for="none" class="registerInput">None</label> 
+
+                <!--Login Input field-->
+                <input type="text" placeholder="email/username" class="loginInput">
+                <input type="password" placeholder="Password" class="loginInput">
+            
+            
+                <a href="onclick='call some function to show reset password page'"><p>Forgot your password?</p></a>
+                <p>If you don't have an account then, <a href="onclick='call some function to show register page'">register</a> now!</p>
+                <p>By clicking on login, you agree to our <a href="onclick='call some function to show terms and conditions page'">terms and conditions</a></p>
+                <button type="submit">Login</button>
+            </div>
+            
+        </div>
+        
+    </div>
+    <script src="src/log&Register.js"></script>
+    <script src="src/databaseScript.js"></script>
+</body>
+</html>
