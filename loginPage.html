@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <!--Login/Register Title font Lemonada-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,700;1,700&family=Lemonada:wght@300..700&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto:ital,wght@0,496;1,496&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="src/loginPage.css">
@@ -8,7 +16,12 @@
     
 </head>
 <body>
+    <header>
+        <button type="button" onclick=""><img src="Assets/Ligthmood icon.png" alt="sunlight icon"></button>
+        <nav>
 
+        </nav>
+    </header>
     <!-- A container for login menu  -->
     <div id="container"> <!--Display style should be flexed, all elements within will inherit flex style-->
         <div id = "login-container">
@@ -16,29 +29,56 @@
             <!--container to hold the input boxes-->
             <div id="inputFields">
                 <!--Register Input Field-->
-                <input type = "text" placeholder="username" class="registerInput">
-                <input type = "text" placeholder="email" class="registerInput">
-                <input type = "text" placeholder="password" class="registerInput">
-                <input type = "text" placeholder="confirm password" class="registerInput">
-                <input type = "radio" name="userType" value="student" class="registerInput">
-                <label for="student" class="registerInput">Student</label>
-                <input type = "radio" name="userType" value="teacher" class="registerInput">
-                <label for="teacher" class="registerInput">Teacher</label>
-                <input type = "radio" name="userType" value="none" class="registerInput"> 
-                <label for="none" class="registerInput">None</label> 
-
+                <input type = "text" name="firstName" placeholder="first name" class="registerInput hideInputOptions" autocomplete="name" required> 
+                <input type = "text" name="lastName" placeholder="last name" class="registerInput hideInputOptions" autocomplete="name" required>
+                <input type = "text"  name="username" placeholder="username" class="registerInput hideInputOptions" autocomplete="username" required>
+                <input type = "text" name="email" placeholder="email" class="registerInput hideInputOptions" autocomplete="email" required>
+                <input type = "text" name="setPassword" placeholder="password" class="registerInput hideInputOptions" autocomplete="off" required>
+                <input type = "text" name="passwordConfirmation" placeholder="confirm password" class="registerInput hideInputOptions" autocomplete="off" required>
+              
                 <!--Login Input field-->
-                <input type="text" placeholder="email/username" class="loginInput">
-                <input type="password" placeholder="Password" class="loginInput">
-            
-            
-                <a href="onclick='call some function to show reset password page'"><p>Forgot your password?</p></a>
-                <p>If you don't have an account then, <a href="onclick='call some function to show register page'">register</a> now!</p>
-                <p>By clicking on login, you agree to our <a href="onclick='call some function to show terms and conditions page'">terms and conditions</a></p>
-                <button type="submit">Login</button>
+                <input type="text" name="username or email" placeholder="email/username" class="loginInput" autocomplete="on" required>
+                <input type="password" name="password" placeholder="Password" class="loginInput" required>
+                
+                <!--Register Radio Options-->
+                <div id="userType" class="hideInputOptions">
+                    <label for="studentRadio" class="registerInput">
+                        <input type = "radio" id="studentRadio" name="userType" value="student" class="registerInput radioInput">
+                        Student
+                    </label>
+
+                    <label for="teacherRadio"  class="registerInput">
+                        <input type = "radio" id="teacherRadio" name="userType" value="teacher" class="radioInput registerInput">
+                        Teacher
+                    </label>
+
+                    <label for="noType" class="radioContainer">
+                        <input type="radio" id="noType" name="userType" value="none" class="radioInput">
+                        None
+                    </label> 
+                </div>
             </div>
-            
-        </div>
+            <section id="loginSection">
+                <div id="loginOptions">
+                    <label for = "rememberMe" class="rememberMe">
+                        <input type="checkbox" id="rememberMe" name="rememberMe" value="rememberMe">
+                        Remember me
+                    </label>
+                    <a href="onclick='call some function to show reset password page'"><p>Forgot password?</p></a>
+                </div> 
+                    <button id="submitBtn" type="submit">Login</button>
+                
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+            </section>
+            <section id="additonalOptions">
+                <p>Don't have an account? <a href="onclick='call some function to show register page'">Signup</a> </p>
+                <!--div>
+                    <p id="terms&Conditions">Terms & Conditions</p>
+                </div-->
+            </section>
+        </div>  
         
     </div>
     <script src="src/log&Register.js"></script>
