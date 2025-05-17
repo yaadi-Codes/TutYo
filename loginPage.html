@@ -24,7 +24,7 @@
     </header>
     <!-- A container for login menu  -->
     <div id="container"> <!--Display style should be flexed, all elements within will inherit flex style-->
-        <div id = "login-container">
+        <form id = "login-container">
             <h1>LOGIN</h1> <!--Subjected to change--- change to Register-->
             <!--container to hold the input boxes-->
             <div id="inputFields">
@@ -38,7 +38,7 @@
               
                 <!--Login Input field-->
                 <input type="text" name="username or email" placeholder="email/username" class="loginInput" autocomplete="on" required>
-                <input type="password" name="password" placeholder="Password" class="loginInput" required>
+                <input type="password" name="password" placeholder="password" class="loginInput" required>
                 
                 <!--Register Radio Options-->
                 <div id="userType" class="hideInputOptions">
@@ -60,9 +60,9 @@
             </div>
             <section id="loginSection">
                 <div id="loginOptions">
-                    <label for = "rememberMe" class="rememberMe">
-                        <input type="checkbox" id="rememberMe" name="rememberMe" value="rememberMe">
-                        Remember me
+                    <label for = "rememberMe" class="rememberMe">   
+                        <input type="checkbox" id="rememberMe" name="rememberMe" value="rememberMe">                   
+                        <p>Remember me</p>
                     </label>
                     <a href="onclick='call some function to show reset password page'"><p>Forgot password?</p></a>
                 </div> 
@@ -71,6 +71,12 @@
                     <div class="divider">
                         <span>or</span>
                     </div>
+                    <div id="socialMediaLogin">
+
+                        <button><img src="Assets/Google-Icon.png" alt="googleLogin"></button>
+                        <button><img src="Assets/Microsoft-Icon.png" alt="microsoftLogin"></button>
+                        <button><img src="Assets/AppleLogos.png" alt="appleLogin"></button>
+                    </div>
             </section>
             <section id="additonalOptions">
                 <p>Don't have an account? <a href="onclick='call some function to show register page'">Signup</a> </p>
@@ -78,7 +84,7 @@
                     <p id="terms&Conditions">Terms & Conditions</p>
                 </div-->
             </section>
-        </div>  
+        </form>  
         
     </div>
     <script src="src/log&Register.js"></script>
