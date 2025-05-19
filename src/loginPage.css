@@ -8,6 +8,7 @@
     --dark-purple: #8a00e0;
     --blur-black: rgba(0, 0, 0, 0.4);
     --blur-white: rgba(255, 255, 255, 0.4);
+     --blur-blue: rgb(30, 144, 255, 0.4);
     --blur-pink: rgba(255, 105, 180, 0.4);
     --brighter-black: rgba(0, 0, 0, 0.8);
     --brighter-white: rgba(255, 255, 255, 0.8);
@@ -20,21 +21,18 @@
 }
 
 body{
-    font-family: Roboto;
+    font-family: Roboto, sans-serif;
     background: var(--primary-color);
     background: radial-gradient(circle, rgba(169, 81, 219, 1) 20%, rgba(138, 0, 224, 1) 66%, rgba(64, 0, 94, 1) 97%);
     color: var(--accent-white);
+    overflow-x: hidden;
 }
     
-header{
-    background-color: black;
-    width: 100%;
-    height: 100px;
-}
-
 #container{
+    position: relative;
+    z-index: 1;
     width: 100%;
-    height: calc(100vh - 100px);
+    height: 100vh;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -42,8 +40,10 @@ header{
 }
 
 #login-container{
-    position: absolute;
-    padding: 20px;
+    margin-top: 85px;
+    z-index: 2;
+    position: relative;
+    padding: 0 0px 20px;
     width: 500px;
     min-height: fit-content;
     height: 500px;
@@ -51,7 +51,7 @@ header{
 }
 
 /*Login text heading style*/
-h1{
+form h1{
     text-align: center;
     font-family: Lemonada;
     font-size: 2.5rem;
@@ -82,7 +82,7 @@ input{
 
 input::placeholder{
     color: var(--brighter-white);
-    font-family: Roboto;
+    font-family: Roboto, sans-serif;
 }
 
 input:focus{
@@ -137,27 +137,31 @@ input[type="checkbox"]{
 }
 
 /*Links section styles*/
-a{
+#container a{
     text-decoration: none;
     color: var(--accent-black);
-    font-family: Roboto;
+    font-family: Roboto, sans-serif;
     font-weight: 500;
     font-size: .9rem ;
 }
-a:visited, a:visited{
+#container a:visited{
     color: var(--dark-purple);
 }
-a:hover {
-  color: var(--accent-pink) ; /* Hot pink on hover */
+#container a:hover,
+#navMenu li a:hover,
+#navMenu li:hover a{
+    display: inline-block;
+    color: var(--accent-pink);       /* Hot pink on hover */
+    transform: scale(1.05);     /* Slightly larger on hover */
+    text-shadow: 0 0 10px var(--accent-black); /* Pink glow effect */
+    transition: transform 0.5s, color 0.2s, text-shadow 0.3s; /* Smooth transition for both */
 }
 
 #loginOptions, #additonalOptions{
-    font-family: Roboto;
+    font-family: Roboto, sans-serif;
     color: var(--accent-white);
     font-size: .9rem;
     font-weight: 500;
-    font-family: Roboto;
- 
 }
 
 #loginSection{
@@ -254,3 +258,4 @@ a:hover {
     padding-top: 20px;
     text-align: center;
 }
+

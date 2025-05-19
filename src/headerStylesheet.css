@@ -1,0 +1,144 @@
+/* ---------------- Header Style -------------------*/
+header{
+    z-index: 999;
+    position: absolute;
+    margin-top: 5px;
+    margin-bottom: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10% 0 15%;
+    /* background-color: rgb(70, 163, 255, 0.5); */
+    background-color: var(--blur-blue);
+    width: 100%;
+    height: 80px;  
+    box-shadow: var(--brighter-black) 0px 0px 20px;
+
+}
+
+
+
+/* -- Logo Style Section */
+header h1{
+    text-align: center;
+    min-width: fit-content;
+    text-wrap: nowrap;
+    font-family: Poetsen One;
+    color: var(--accent-black);
+    font-size: 1.8rem;
+    letter-spacing: 5px;
+}
+header h1::after {
+  padding-left: 3px;
+  flex: 1;
+  content: '"Making learning fun"'; /* ✅ Proper string syntax */
+  font-size: 0.6rem;
+  letter-spacing: 1.5px;
+  color: var(--accent-white);
+  font-family: 'Roboto', sans-serif; /* ✅ Font fallback added */
+  font-weight: 500;
+  display: inline-block; /* ✅ Ensures spacing and wrapping rules apply */
+}
+header h1:hover{
+    letter-spacing: 2px;
+    color: var(--accent-pink);
+    text-shadow: 0 0 10px var(--accent-black);
+    transition: color 0.5s ease-in-out, text-shadow 0.5s ease-in-out;
+    transform: scale(.9);
+    cursor: pointer;
+}
+header h1:hover span{
+    letter-spacing: 0px;
+    color: var(--accent-black);
+    background-color: var(--blur-pink);
+    text-shadow: 0 0 10px var(--accent-white);
+    transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+}
+header h1 span{
+    border-radius: 10px;
+    margin-right: 3px;
+    padding: 5px 3px 0px 5px;
+    background-color: var(--accent-pink);
+    font-family: Poetsen One;
+    color: var(--accent-white);
+}
+
+/* -- Navigation Menu Style Section */
+#hamburgerBar{
+    position: absolute;
+    display: none;
+    left: 30px;
+    font-size: 2.4rem;
+    font-weight: 600;
+    padding-bottom: 5px;
+}
+#hamburgerBar:hover {
+    transform: scale(1.2);
+    color: var(--accent-black);
+    transition: transform 0.5s ease-in-out;
+    cursor: pointer;
+}
+/* Navigation List when view is greater than 850px */
+header nav {
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    align-items: center;
+    min-width: fit-content; /* Prevent overflow */
+}
+#navMenu {
+    
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    min-width: 50vw;
+}
+#navMenu li a{
+    text-wrap: nowrap;
+    flex-grow: 1;
+    text-decoration: none;
+    font-family: Roboto, sans-serif;
+    color: var(--accent-white);
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+@media screen and (max-width: 850px) {
+    /* Header section style for <850px */
+    #navMenu {
+        z-index: 999;
+        padding: 20px 0px;
+        position: absolute;
+        top: 80px;
+        left: 0px;
+        display: none; /* change to block when hamburgerBar is selected */
+        background-color: var(--accent-black);
+        width: 100vw;
+        height: fit-content;
+    }
+    #navMenu li {
+        padding: 20px;
+        text-align: center;    
+    }
+    #navMenu li:hover{
+        background-color: var(--blur-white);
+    }
+    #navMenu li:hover a{
+        color: var(--accent-pink);
+        text-shadow: 0 0 10px var(--accent-black);          
+    }
+    #hamburgerBar{
+        padding-left: 5px;
+        display: block;
+        font-size: 2.5rem
+    }
+}
+
+@media screen and (max-width: 400px) {
+    header h1::after{
+        content: '';
+    }
+}
