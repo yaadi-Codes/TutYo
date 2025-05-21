@@ -15,14 +15,17 @@ header{
     box-shadow: var(--brighter-black) 0px 0px 20px;
 
 }
-
+/*TODO: Make the header sticky by using 'position: sticky' or 'position: fixed'.
+Once it passes a certain height, use JavaScript to toggle a 'hidden' class 
+to hide the header and make it reappear on hover. Refer to MDN's sticky positioning guide: 
+https://developer.mozilla.org/en-US/docs/Web/CSS/position#sticky_positioning */
 
 
 /* -- Logo Style Section */
 header h1{
     text-align: center;
     min-width: fit-content;
-    text-wrap: nowrap;
+    white-space: nowrap;
     font-family: Poetsen One;
     color: var(--accent-black);
     font-size: 1.8rem;
@@ -31,7 +34,7 @@ header h1{
 header h1::after {
   padding-left: 3px;
   flex: 1;
-  content: '"Making learning fun"'; /* ✅ Proper string syntax */
+  content: "\"Making learning fun\""; /* ✅ Proper string syntax */
   font-size: 0.6rem;
   letter-spacing: 1.5px;
   color: var(--accent-white);
@@ -44,7 +47,7 @@ header h1:hover{
     color: var(--accent-pink);
     text-shadow: 0 0 10px var(--accent-black);
     transition: color 0.5s ease-in-out, text-shadow 0.5s ease-in-out;
-    transform: scale(.9);
+    transform: scale(0.9);
     cursor: pointer;
 }
 header h1:hover span{
@@ -68,15 +71,37 @@ header h1 span{
     position: absolute;
     display: none;
     left: 30px;
-    font-size: 2.4rem;
-    font-weight: 600;
-    padding-bottom: 5px;
+    height: fit-content;
+    transition: all 0.5s ease-out;
 }
-#hamburgerBar:hover {
+#hamburgerBar:hover{
     transform: scale(1.2);
     color: var(--accent-black);
     transition: transform 0.5s ease-in-out;
     cursor: pointer;
+}
+.hamburgerLine {
+    width: 30px;
+    height: 5px;
+    margin: 0 0 5px 0;
+    background: var(--accent-black);
+    transition: all 0.3s ease;
+}
+
+#hamburgerBar.close{
+    transform: rotate(180deg);
+}
+#hamburgerBar.close .hamburgerLine:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+    transition-delay: 0.1s;
+}
+#hamburgerBar.close .hamburgerLine:nth-child(2) {
+    opacity: 0;
+    transition-delay: 0.2s;
+}
+#hamburgerBar.close .hamburgerLine:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+    transition-delay: 0.3s;
 }
 /* Navigation List when view is greater than 850px */
 header nav {
@@ -89,22 +114,37 @@ header nav {
     min-width: fit-content; /* Prevent overflow */
 }
 #navMenu {
-    
     list-style: none;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     min-width: 50vw;
 }
+
+
 #navMenu li a{
-    text-wrap: nowrap;
-    flex-grow: 1;
+    white-space: nowrap;
     text-decoration: none;
-    font-family: Roboto, sans-serif;
     color: var(--accent-white);
     font-size: 1.2rem;
     font-weight: 800;
 }
+/*Utility class section */
+#navMenu li a.disabled {
+    all: unset !important;
+    font: Roboto, sans-serif !important;
+    font-size: 1.2rem !important;
+    font-weight: 800 !important;
+    color: var(--blur-white) !important;
+    cursor: default !important;
+    display: inline-block !important;
+    width: 100% !important;
+    text-align: center !important;
+}
+.show{
+    display: block !important;
+}
+
 
 @media screen and (max-width: 850px) {
     /* Header section style for <850px */
@@ -114,31 +154,43 @@ header nav {
         position: absolute;
         top: 80px;
         left: 0px;
-        display: none; /* change to block when hamburgerBar is selected */
+        display: none;
         background-color: var(--accent-black);
         width: 100vw;
         height: fit-content;
     }
-    #navMenu li {
-        padding: 20px;
+    #navMenu li{
+        height: fit-content;
+    }
+    #navMenu li a{
+        display: inline-block;
+        width: 100%;
+        padding: 20px 0 !important;
         text-align: center;    
     }
-    #navMenu li:hover{
+    #navMenu li a:hover{
         background-color: var(--blur-white);
     }
-    #navMenu li:hover a{
+    #navMenu li a:hover a{
         color: var(--accent-pink);
         text-shadow: 0 0 10px var(--accent-black);          
     }
     #hamburgerBar{
         padding-left: 5px;
         display: block;
-        font-size: 2.5rem
+        font-size: 2.5rem;
     }
 }
 
 @media screen and (max-width: 400px) {
     header h1::after{
         content: '';
+        visibility: hidden; /* Visually hide the text */
+        position: absolute; /* Remove it from the layout */
+        clip: rect(0, 0, 0, 0); /* Ensure it's not visible */
+        clip-path: inset(50%); /* Alternative for modern browsers */
+        height: 1px; /* Maintain minimal space */
+        width: 1px; /* Maintain minimal space */
+        overflow: hidden; /* Prevent overflow */
     }
 }

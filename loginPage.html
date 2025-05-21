@@ -1,41 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-        <!--Logo font Poetsen One-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,700;1,700&family=Lemonada:wght@300..700&family=Poetsen+One&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto:ital,wght@0,496;1,496&display=swap" rel="stylesheet">
-
-    <!--Body text font Roboto-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<head>    
     
-    <!--Login/Register Title font Lemonada-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&family=Lemonada:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,700;1,700&family=Lemonada:wght@300..700&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto:ital,wght@0,496;1,496&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,400;0,700;1,400;1,700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="src/loginPage.css">
-        <link rel="stylesheet" href="src/headerStylesheet.css">
-
-    
+    <link rel="stylesheet" href="src/headerStylesheet.css">
+    <link rel="stylesheet" href="src/bodyStyleSheet1.css">
+    <meta name="description" content="Simply Lecture - A platform for online learning">
+    <meta name="keywords" content="login, TutYo, tutyo, TUTYO, tutYo, summarize, lecture, notes, simplification, quizes, learning, flashcards">
     <title>Login</title>
     
 </head>
 <body>
     <header>
-        <div id="hamburgerBar">☰</div>
+        <div id="hamburgerBar">            
+            <div class="hamburgerLine"></div>
+            <div class="hamburgerLine"></div>
+            <div class="hamburgerLine"></div>
+        </div>
+        
         <nav>
-            
             <ul id="navMenu">
-                <li><a href="#.html">Home</a></li>
-                <li><a href="#.html">About Us</a></li>
-                <li><a href="#.html">Resources</a></li>
-                <li><a href="#.html">Profile</a></li>
+                <li><a class="headerNavLinks" id="homeLink" href="/index.html">Home</a></li>
+                <li><a class="headerNavLinks" id="aboutUsLink" href="#aboutUs.html">About Us</a></li>
+                <li><a class="headerNavLinks" id="dashboardLink" href="Dashboard.html">Dashboard</a></li>
+                <li><a class="headerNavLinks" id="profileLink" href="profilePage.html">Profile</a></li>
             </ul>
+        </nav>
         </nav>
         <div id="logo">
             <h1>Tut<span>Yo</span></h1>
@@ -46,7 +47,7 @@
         <form id = "login-container">
             <h1>LOGIN</h1> <!--Subjected to change--- change to Register-->
             <!--container to hold the input boxes-->
-            <div id="inputFields">
+            <div id="inputFieldContainer">
                 <!--Register Input Field-->
                 <input type = "text" name="firstName" placeholder="first name" class="registerInput hideInputOptions" autocomplete="name" required> 
                 <input type = "text" name="lastName" placeholder="last name" class="registerInput hideInputOptions" autocomplete="name" required>
@@ -106,6 +107,7 @@
         </form>  
         
     </div>
+    <script src = "src/headerFunctionality.js"></script>
     <script src="src/log&Register.js"></script>
     <script src="src/databaseScript.js"></script>
 </body>
