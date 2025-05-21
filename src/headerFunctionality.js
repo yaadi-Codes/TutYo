@@ -7,11 +7,21 @@ const navigationMenu = document.getElementById("navMenu");
 
 // Function to toggle the hamburger menu
 hamburgerBar.addEventListener("click", showHamburgerMenu);
-
+// Add event listener to the document to remove show class when clicking outside the menu
+document.addEventListener("click", (event) => {
+    if (navigationMenu.classList.contains("show") &&
+        !hamburgerBar.contains(event.target) &&
+        !navigationMenu.contains(event.target)
+    ) {
+        navigationMenu.classList.remove("show");
+        hamburgerBar.classList.remove("close");
+    }
+});
 // Function to show the hamburger menu
 function showHamburgerMenu(){
         hamburgerBar.classList.toggle('close');
         navigationMenu.classList.toggle('show');
+
 }
 
 //Section for header page navigation functionality
