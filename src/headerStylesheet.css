@@ -165,8 +165,11 @@ header nav {
     #navMenu li a{
         display: inline-block;
         width: 100%;
-        padding: 20px 0 !important;
+        padding: 20px 0;
         text-align: center;    
+    }
+    #navMenu li a.disabled {
+        padding: 20px 0 !important;
     }
     #navMenu li a:hover{
         background-color: var(--blur-white);
