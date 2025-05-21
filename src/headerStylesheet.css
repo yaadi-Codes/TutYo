@@ -141,13 +141,14 @@ header nav {
     width: 100% !important;
     text-align: center !important;
 }
-.show{
-    display: block !important;
-}
 
 
 @media screen and (max-width: 850px) {
     /* Header section style for <850px */
+    .show{
+        display: inline-block !important;
+    }
+
     #navMenu {
         z-index: 999;
         padding: 20px 0px;
