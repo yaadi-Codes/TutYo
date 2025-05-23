@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="src/bodyStyleSheet1.css">
     <meta name="description" content="Simply Lecture - A platform for online learning">
     <meta name="keywords" content="login, TutYo, tutyo, TUTYO, tutYo, summarize, lecture, notes, simplification, quizes, learning, flashcards">
-    <title>Login</title>
+    <title>Login - Tutyo</title>
     
 </head>
 <body>
@@ -43,9 +43,8 @@
         </div>
     </header>
     <!-- A container for login menu  -->
-    <div id="container"> <!--Display style should be flexed, all elements within will inherit flex style-->
-        <form id = "login-container">
-            <h1>LOGIN</h1> <!--Subjected to change--- change to Register-->
+        <form class = "container-form loginMode">
+            <h1 id="formTitle">LOGIN</h1> <!--Subjected to change--- change to Register-->
             <!--container to hold the input boxes-->
             <div id="inputFieldContainer">
                 <!--Register Input Field-->
@@ -62,24 +61,24 @@
                 
                 <!--Register Radio Options-->
                 <div id="userType" class="hideInputOptions">
-                    <label for="studentRadio" class="registerInput">
-                        <input type = "radio" id="studentRadio" name="userType" value="student" class="registerInput radioInput">
+                    <label for="studentRadio" class="registerInput hideInputOptions">
+                        <input type = "radio" id="studentRadio" name="userType" value="student" class="radioInput">
                         Student
                     </label>
 
-                    <label for="teacherRadio"  class="registerInput">
-                        <input type = "radio" id="teacherRadio" name="userType" value="teacher" class="radioInput registerInput">
+                    <label for="teacherRadio"  class="registerInput hideInputOptions">
+                        <input type = "radio" id="teacherRadio" name="userType" value="teacher" class="radioInput">
                         Teacher
                     </label>
 
-                    <label for="noType" class="radioContainer">
+                    <label for="noType" class="registerInput hideInputOptions">
                         <input type="radio" id="noType" name="userType" value="none" class="radioInput">
                         None
                     </label> 
                 </div>
-            </div>
+ 
             <section id="loginSection">
-                <div id="loginOptions">
+                <div id="loginOptions" class="loginInput">
                     <label for = "rememberMe" class="rememberMe">   
                         <input type="checkbox" id="rememberMe" name="rememberMe" value="rememberMe">                   
                         <p>Remember me</p>
@@ -87,19 +86,17 @@
                     <a href="onclick='call some function to show reset password page'"><p>Forgot password?</p></a>
                 </div> 
                     <button id="submitBtn" type="submit">Login</button>
-                
                     <div class="divider">
                         <span>or</span>
                     </div>
                     <div id="socialMediaLogin">
-
                         <button type="button"><img src="Assets/Google-Icon.png" alt="googleLogin"></button>
                         <button type="button"><img src="Assets/Microsoft-Icon.png" alt="microsoftLogin"></button>
                         <button type="button"><img src="Assets/AppleLogos.png" alt="appleLogin"></button>
                     </div>
             </section>
             <section id="additonalOptions">
-                <p>Don't have an account? <a href="onclick='call some function to show register page'">Sign up</a> </p>
+                <p id="switchModeText">Don't have an account? <a class="switchModeLink" href="#.html">Sign up</a> </p>
                 <!--div>
                     <p id="terms&Conditions">Terms & Conditions</p>
                 </div-->

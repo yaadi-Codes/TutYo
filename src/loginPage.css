@@ -1,4 +1,4 @@
-#container{
+body{
     position: relative;
     z-index: 1;
     width: 100%;
@@ -9,11 +9,12 @@
     align-items: center;
 }
 
-#login-container{
-    margin-top: 85px;
+.container-form{
+    padding-top: 85px;
+    padding-bottom: 85px;
     z-index: 2;
-    position: relative;
-    padding: 0 0 20px;
+    position: absolute;
+    top: 10%;
     width: 500px;
     min-height: fit-content;
     height: 500px;
@@ -73,10 +74,13 @@ input:not(.radioInput, #rememberMe):hover{
     display: none !important;
 }
 
+
 form #userType{
     display: flex;
     justify-content: space-evenly;
     width: 100%;
+    padding: 20px 0px 20px 0px;
+    align-items: center;
    
 }
 
@@ -84,7 +88,9 @@ form #userType{
     display: flex;
     align-items: center;  
 }
-
+#userType.hideInputOptions{
+    padding: 0px !important;
+}
 input[type="radio"]{
     border-radius: 50%;
     width: 20px;
@@ -107,7 +113,7 @@ input[type="checkbox"]{
 }
 
 /*Links section styles*/
-#container a{
+body a{
     text-decoration: none;
     color: var(--accent-black);
     font-family: Roboto, sans-serif;
@@ -115,10 +121,10 @@ input[type="checkbox"]{
     font-size: .9rem ;
     display: inline-block;
 }
-#container a:visited{
-    color: var(--dark-purple);
+body a:visited{
+    color: var(--blur-blue);
 }
-#container a:hover,
+body a:hover,
 #navMenu li a:hover,
 #navMenu li:hover a{
     display: inline-block;
@@ -136,9 +142,8 @@ input[type="checkbox"]{
 }
 
 #loginSection{
-    padding: 0 10%;
+    width: 100%;
     padding-bottom: 20px;
-
 }
 #rememberMe{
     cursor: pointer;
@@ -190,8 +195,8 @@ input[type="checkbox"]{
 }
 .divider::before,
 .divider::after {
-  content: '';
-  flex: 1;
+    content: '';
+    flex: 1;
     border-bottom: 1px solid var(--accent-white);
 
 }
