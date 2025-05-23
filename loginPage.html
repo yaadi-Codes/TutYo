@@ -43,39 +43,39 @@
         </div>
     </header>
     <!-- A container for login menu  -->
-        <form class = "container-form loginMode">
-            <h1 id="formTitle">LOGIN</h1> <!--Subjected to change--- change to Register-->
-            <!--container to hold the input boxes-->
-            <div id="inputFieldContainer">
-                <!--Register Input Field-->
-                <input type = "text" name="firstName" placeholder="first name" class="registerInput hideInputOptions" autocomplete="name" required> 
-                <input type = "text" name="lastName" placeholder="last name" class="registerInput hideInputOptions" autocomplete="name" required>
-                <input type = "text"  name="username" placeholder="username" class="registerInput hideInputOptions" autocomplete="username" required>
-                <input type = "text" name="email" placeholder="email" class="registerInput hideInputOptions" autocomplete="email" required>
-                <input type = "text" name="setPassword" placeholder="password" class="registerInput hideInputOptions" autocomplete="off" required>
-                <input type = "text" name="passwordConfirmation" placeholder="confirm password" class="registerInput hideInputOptions" autocomplete="off" required>
+    <form class = "container-form loginMode">
+        <h1 id="formTitle">LOGIN</h1> <!--Subjected to change--- change to Register-->
+        <!--container to hold the input boxes-->
+        <div id="inputFieldContainer">
+            <!--Register Input Field-->
+            <input type = "text" name="firstName" placeholder="first name" class="registerInput hideInputOptions" autocomplete="name" required> 
+            <input type = "text" name="lastName" placeholder="last name" class="registerInput hideInputOptions" autocomplete="name" required>
+            <input type = "text"  name="username" placeholder="username" class="registerInput hideInputOptions" autocomplete="username" required>
+            <input type = "text" name="email" placeholder="email" class="registerInput hideInputOptions" autocomplete="email" required>
+            <input type = "text" name="setPassword" placeholder="password" class="registerInput hideInputOptions" autocomplete="off" required>
+            <input type = "text" name="passwordConfirmation" placeholder="confirm password" class="registerInput hideInputOptions" autocomplete="off" required>
               
-                <!--Login Input field-->
-                <input type="text" name="username or email" placeholder="email/username" class="loginInput" autocomplete="on" required>
-                <input type="password" name="password" placeholder="password" class="loginInput" required>
+            <!--Login Input field-->
+            <input type="text" name="username or email" placeholder="email/username" class="loginInput" autocomplete="on" required>
+            <input type="password" name="password" placeholder="password" class="loginInput" required>
                 
-                <!--Register Radio Options-->
-                <div id="userType" class="hideInputOptions">
-                    <label for="studentRadio" class="registerInput hideInputOptions">
-                        <input type = "radio" id="studentRadio" name="userType" value="student" class="radioInput">
-                        Student
-                    </label>
+            <!--Register Radio Options-->
+            <div id="userType" class="hideInputOptions">
+                <label for="studentRadio" class="registerInput hideInputOptions">
+                <input type = "radio" id="studentRadio" name="userType" value="student" class="radioInput">
+                    Student
+                </label>
 
-                    <label for="teacherRadio"  class="registerInput hideInputOptions">
-                        <input type = "radio" id="teacherRadio" name="userType" value="teacher" class="radioInput">
+                <label for="teacherRadio"  class="registerInput hideInputOptions">
+                    <input type = "radio" id="teacherRadio" name="userType" value="teacher" class="radioInput">
                         Teacher
-                    </label>
+                </label>
 
-                    <label for="noType" class="registerInput hideInputOptions">
-                        <input type="radio" id="noType" name="userType" value="none" class="radioInput">
+                <label for="noType" class="registerInput hideInputOptions">
+                    <input type="radio" id="noType" name="userType" value="none" class="radioInput">
                         None
-                    </label> 
-                </div>
+                </label> 
+            </div>
  
             <section id="loginSection">
                 <div id="loginOptions" class="loginInput">
