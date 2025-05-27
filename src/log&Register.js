@@ -1,3 +1,4 @@
+"use strict";
 const loginForm = document.querySelector(".container-form");
 const registerFields = document.querySelectorAll(".registerInput");
 const loginFields = document.querySelectorAll(".loginInput");

@@ -1,3 +1,4 @@
+"use strict";
 // This file contains the JavaScript code for the 
 // frontend functionality of the header section of the website.
 
