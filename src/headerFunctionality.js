@@ -1,3 +1,17 @@
+//Let's create a fucntion what will be called to update the isLogin variable
+//this function will be called from the login.js file when the user logs in and out
+
+function updateHeaderLinks(isLogin){
+    this.isLogin = isLogin;
+    if(!isLogin){
+        document.getElementById("profileLink").classList.add("disabled");
+        document.getElementById("dashboardLink").classList.add("disabled");
+    }else{
+        document.getElementById("profileLink").classList.remove("disabled");
+        document.getElementById("dashboardLink").classList.remove("disabled");
+    }
+}
+
 "use strict";
 // This file contains the JavaScript code for the 
 // frontend functionality of the header section of the website.
@@ -50,19 +64,6 @@ headerPageLinks.forEach(item => {
 
 let isLogin = false;
 updateHeaderLinks(isLogin);
-//Let's create a fucntion what will be called to update the isLogin variable
-//this function will be called from the login.js file when the user logs in and out
-
-function updateHeaderLinks(isLogin){
-    this.isLogin = isLogin;
-    if(!isLogin){
-        document.getElementById("profileLink").classList.add("disabled");
-        document.getElementById("dashboardLink").classList.add("disabled");
-    }else{
-        document.getElementById("profileLink").classList.remove("disabled");
-        document.getElementById("dashboardLink").classList.remove("disabled");
-    }
-}
 
 //Section to handle logo click functionality
 const logo = document.getElementById("logo");
