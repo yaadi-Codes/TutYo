@@ -5,20 +5,23 @@
         <%- include('../partials/header')%>
         <!-- A container for login menu  -->
         <form class = "container-form loginMode">
+            <!-- This is the form action that will be used to determine if the user is logging in or registering -->
+            <input type="hidden" name="action" id="formAction" value="login">
+
             <h1 id="formTitle">LOGIN</h1> <!--Subjected to change--- change to Register-->
             <!--container to hold the input boxes-->
             <div id="inputFieldContainer">
                 <!--Register Input Field-->
-                <input type = "text" name="firstName" placeholder="first name" class="registerInput hideInputOptions" autocomplete="name" required> 
-                <input type = "text" name="lastName" placeholder="last name" class="registerInput hideInputOptions" autocomplete="name" required>
-                <input type = "text"  name="username" placeholder="username" class="registerInput hideInputOptions" autocomplete="username" required>
-                <input type = "text" name="email" placeholder="email" class="registerInput hideInputOptions" autocomplete="email" required>
-                <input type = "text" name="setPassword" placeholder="password" class="registerInput hideInputOptions" autocomplete="off" required>
-                <input type = "text" name="passwordConfirmation" placeholder="confirm password" class="registerInput hideInputOptions" autocomplete="off" required>
+                <input type = "text" name="firstName" placeholder="first name" class="registerInput hideInputOptions" autocomplete="name"> 
+                <input type = "text" name="lastName" placeholder="last name" class="registerInput hideInputOptions" autocomplete="name" >
+                <input type = "text"  name="username" placeholder="username" class="registerInput hideInputOptions" autocomplete="username" >
+                <input type = "text" name="email" placeholder="email" class="registerInput hideInputOptions" autocomplete="email" >
+                <input type = "text" name="setPassword" placeholder="password" class="registerInput hideInputOptions" autocomplete="off" >
+                <input type = "text" name="passwordConfirmation" placeholder="confirm password" class="registerInput hideInputOptions" autocomplete="off" >
                 
                 <!--Login Input field-->
-                <input type="text" name="username or email" placeholder="email/username" class="loginInput" autocomplete="on" required>
-                <input type="password" name="password" placeholder="password" class="loginInput" required>
+                <input type="text" name="username or email" placeholder="email/username" class="loginInput" autocomplete="on" >
+                <input type="password" name="password" placeholder="password" class="loginInput" >
                     
                 <!--Register Radio Options-->
                 <div id="userType" class="hideInputOptions">
