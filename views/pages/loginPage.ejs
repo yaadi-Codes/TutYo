@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%-include('../partials/head')%>
+    <body>
+        <%- include('../partials/header')%>
+        <!-- A container for login menu  -->
+        <form class = "container-form loginMode">
+            <h1 id="formTitle">LOGIN</h1> <!--Subjected to change--- change to Register-->
+            <!--container to hold the input boxes-->
+            <div id="inputFieldContainer">
+                <!--Register Input Field-->
+                <input type = "text" name="firstName" placeholder="first name" class="registerInput hideInputOptions" autocomplete="name" required> 
+                <input type = "text" name="lastName" placeholder="last name" class="registerInput hideInputOptions" autocomplete="name" required>
+                <input type = "text"  name="username" placeholder="username" class="registerInput hideInputOptions" autocomplete="username" required>
+                <input type = "text" name="email" placeholder="email" class="registerInput hideInputOptions" autocomplete="email" required>
+                <input type = "text" name="setPassword" placeholder="password" class="registerInput hideInputOptions" autocomplete="off" required>
+                <input type = "text" name="passwordConfirmation" placeholder="confirm password" class="registerInput hideInputOptions" autocomplete="off" required>
+                
+                <!--Login Input field-->
+                <input type="text" name="username or email" placeholder="email/username" class="loginInput" autocomplete="on" required>
+                <input type="password" name="password" placeholder="password" class="loginInput" required>
+                    
+                <!--Register Radio Options-->
+                <div id="userType" class="hideInputOptions">
+                    <label for="studentRadio" class="registerInput hideInputOptions">
+                        <input type = "radio" id="studentRadio" name="userType" value="student" class="radioInput">
+                        Student
+                    </label>
+
+                    <label for="teacherRadio"  class="registerInput hideInputOptions">
+                        <input type = "radio" id="teacherRadio" name="userType" value="teacher" class="radioInput">
+                        Teacher
+                    </label>
+
+                    <label for="noType" class="registerInput hideInputOptions">
+                        <input type="radio" id="noType" name="userType" value="none" class="radioInput">
+                        None
+                    </label> 
+                </div>
+    
+                <section id="loginSection">
+                    <div id="loginOptions" class="loginInput">
+                        <label for = "rememberMe" class="rememberMe">   
+                            <input type="checkbox" id="rememberMe" name="rememberMe" value="rememberMe">                   
+                            <p>Remember me</p>
+                        </label>
+                        <a href="onclick='call some function to show reset password page'"><p>Forgot password?</p></a>
+                    </div> 
+                    <button id="submitBtn" type="submit">Login</button>
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+                    <div id="socialMediaLogin">
+                        <button type="button"><img src="/Assets/Google-Icon.png" alt="googleLogin"></button>
+                        <button type="button"><img src="/Assets/Microsoft-Icon.png" alt="microsoftLogin"></button>
+                        <button type="button"><img src="/Assets/AppleLogos.png" alt="appleLogin"></button>
+                    </div>
+                </section>
+                <section id="additonalOptions">
+                    <p id="switchModeText">Don't have an account? <a class="switchModeLink" href="#.html">Sign up</a> </p>
+                <!--div>
+                <p id="terms&Conditions">Terms & Conditions</p>
+                </div-->
+                </section>
+            </div>
+        </form>  
+
+
+        <script src = "javaScript/headerFunctionality.js"></script>
+        <script src="javaScript/loginAndRegister.js"></script>
+        <script src="javaScript/databaseScript.js"></script>
+    </body>
+</html>

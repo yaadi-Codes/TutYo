@@ -23,9 +23,11 @@ https://developer.mozilla.org/en-US/docs/Web/CSS/position#sticky_positioning */
 /* -- Logo Style Section */
 header h1{
     text-align: center;
+    min-width: -moz-fit-content; /* Firefox legacy */
+    min-width: -webkit-fit-content; /* Safari legacy */
     min-width: fit-content;
     white-space: nowrap;
-    font-family: Poetsen One;
+    font-family: 'Poetsen One', sans-serif;
     color: var(--accent-black);
     font-size: 1.8rem;
     letter-spacing: 5px;
@@ -70,6 +72,8 @@ header h1 span{
     position: absolute;
     display: none;
     left: 30px;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
     height: fit-content;
     transition: all 0.5s ease-out;
 }
@@ -110,6 +114,8 @@ header nav {
     flex-grow: 1;
     justify-content: space-between;
     align-items: center;
+    min-width: -webkit-fit-content;
+    min-width: -moz-fit-content;
     min-width: fit-content; /* Prevent overflow */
 }
 #navMenu {
@@ -157,9 +163,13 @@ header nav {
         display: none;
         background-color: var(--accent-black);
         width: 100vw;
+        height: -webkit-fit-content;
+        height: -moz-fit-content;
         height: fit-content;
     }
     #navMenu li{
+        height: -webkit-fit-content;
+        height: -moz-fit-content;  
         height: fit-content;
     }
     #navMenu li a{
