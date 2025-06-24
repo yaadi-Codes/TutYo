@@ -4,25 +4,41 @@
     <body>
         <%- include('../partials/header')%>
         <!-- A container for login menu  -->
-        <form class = "container-form loginMode">
+        <form class = "container-form" data-mode = "login">
             <!-- This is the form action that will be used to determine if the user is logging in or registering -->
             <input type="hidden" name="action" id="formAction" value="login">
 
             <h1 id="formTitle">LOGIN</h1> <!--Subjected to change--- change to Register-->
             <!--container to hold the input boxes-->
+            <div class="error" id="formError"></div>
+
             <div id="inputFieldContainer">
                 <!--Register Input Field-->
+                <div class="error" id="fNameError"></div>
                 <input type = "text" name="firstName" placeholder="first name" class="registerInput hideInputOptions" autocomplete="name"> 
-                <input type = "text" name="lastName" placeholder="last name" class="registerInput hideInputOptions" autocomplete="name" >
-                <input type = "text"  name="username" placeholder="username" class="registerInput hideInputOptions" autocomplete="username" >
-                <input type = "text" name="email" placeholder="email" class="registerInput hideInputOptions" autocomplete="email" >
-                <input type = "text" name="setPassword" placeholder="password" class="registerInput hideInputOptions" autocomplete="off" >
-                <input type = "text" name="passwordConfirmation" placeholder="confirm password" class="registerInput hideInputOptions" autocomplete="off" >
                 
+                <div class="error" id="lNameError"></div>
+                <input type = "text" name="lastName" placeholder="last name" class="registerInput hideInputOptions" autocomplete="name" >
+                
+                <div class="error" id="usernameError"></div>
+                <input type = "text"  name="username" placeholder="username" class="registerInput hideInputOptions" autocomplete="username" >
+                
+                <div class="error" id="emailError"></div>
+                <input type = "text" name="email" placeholder="email" class="registerInput hideInputOptions" autocomplete="email" >
+                
+                <div class="error" id="registerPasswordError"></div>
+                <input type = "password" name="setPassword" placeholder="password" class="registerInput hideInputOptions" autocomplete="off" >
+                <input type = "password" name="confirmPassword" placeholder="confirm password" class="registerInput hideInputOptions" autocomplete="off" >
+     
                 <!--Login Input field-->
-                <input type="text" name="username or email" placeholder="email/username" class="loginInput" autocomplete="on" >
+                <div class="error" id="usernameOrEmailError"></div>
+                <input type="text" name="userOrEmail" placeholder="email/username" class="loginInput" autocomplete="on" >
+                
+                <div class="error" id="loginPasswordError"></div>   
                 <input type="password" name="password" placeholder="password" class="loginInput" >
-                    
+                
+
+                <div class="error" id="userTypeError"></div>
                 <!--Register Radio Options-->
                 <div id="userType" class="hideInputOptions">
                     <label for="studentRadio" class="registerInput hideInputOptions">
@@ -40,6 +56,7 @@
                         None
                     </label> 
                 </div>
+                
     
                 <section id="loginSection">
                     <div id="loginOptions" class="loginInput">

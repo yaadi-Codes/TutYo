@@ -1,0 +1,27 @@
+{
+  "name": "tutyo",
+  "version": "1.0.0",
+  "description": "A tool to summarize, generate quizzes, provide fun facts and generate flashcards on uploaded lecture notes.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yaadi-Codes/Tutyo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yaadi-Codes/Tutyo/issues"
+  },
+  "homepage": "https://github.com/yaadi-Codes/Tutyo#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "mongodb": "6.17"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.3"
+  }
+}
