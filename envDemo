@@ -1,0 +1,2 @@
+DB_USER = #Create a database using MongoDB Atlas and copy the user name
+DB_PASS = #user password

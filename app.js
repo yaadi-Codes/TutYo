@@ -3,23 +3,25 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const { connectToDb, getDb } = require('./db');
-
+const jwt = require('jsonwebtoken');
+/* const cookieParser = require('cookie-parser'); */
+require('dotenv').config();
 
 let db;
 //connect to the database
-connectToDb((err)=>{
-    if (err){
+(async () => {
+    try {
+        await connectToDb();
+        db = getDb();
+        app.listen(process.env.PORT || 3000, () => {
+            console.log(`Server is running on port ${process.env.PORT || 3000}`);
+        });
+        console.log('Connected to the database');//Debugger
+    }catch (err) {
         console.error('Failed to connect to the database', err);
-        return;
+        process.exit(1); 
     }
-    console.log('Connected to the database');
-    app.listen(3000, () =>{
-        console.log('Server is running on port 3000...')
-    }),
-    db = getDb();
-
-})
-
+})();
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
@@ -30,6 +32,25 @@ app.use(morgan('dev'));
 app.get('/', (req, res)=>{
     res.render('./pages/index', {title: 'Home', stylesheets: ['index.css']});
 })
+app.get('/auto-login', (req, res)=>{
+    const authHeader = req.headers['authorization'];
+    const token = authHeader?.split(' ')[1]; // Extract token from the Authorization header
+    if (!token) {
+        return res.status(401).json({ result: 'fail', message: 'No token provided' });
+    }
+    try{
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        return res.status(200).json({
+            result: 'success',
+            message: 'Auto-login successful',
+            user: decoded
+        });
+
+    }catch(err){
+        console.error('Error during auto-login:', err);
+        return res.status(500).json({ result: 'fail', message: 'Internal server error' });
+    }
+});
 app.get('/loginOrRegister', (req, res)=>{
     res.render('./pages/loginPage', {title : 'Login', stylesheets : ['loginPage.css']})
 })
@@ -61,14 +82,29 @@ app.post('/loginOrRegister', async (req, res)=>{
                     //If the password is invalid, we will return an error response
                     if(!ispasswordValid) return res.status(401).json({ result: 'fail', message: 'Invalid password' });
                     //else
+                    const token = jwt.sign(
+                        {
+                            id: user._id,
+                            username: user.username,
+                            firstName: user.firstName,
+                            lastName: user.lastName,         
+                            email: user.email                
+                        },
+                        process.env.JWT_SECRET,
+                    )
+                    /* res.cookie('auth_token', token, {
+                        httpOnly: true,
+                        secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+                        sameSite: 'Strict', // Prevent CSRF attacks
+                    }) */
                     return res.status(200).json({
                         result: 'success',
-                        message: 'Login successful',
+                        message: 'Login Successful',
+                        token: token,
                         user: {
-                            name: user.name,
-                            email: user.email,
-                            id: user._id
-                        }
+                            id: user._id,
+                            username: user.username,
+                        }    
                     });
                 } catch (err) {
                     console.error('Error comparing passwords:', err);
@@ -118,5 +154,15 @@ app.post('/loginOrRegister', async (req, res)=>{
         return res.status(500).json({ result: 'fail', message: 'Internal server error' });  
     }
 })
-
-//ToDo: 
+app.get('/loggedIn', (req, res) =>{
+    res.redirect('/dashboard');
+});
+app.get('/dashboard', (req, res)=>{
+    res.render('./pages/Dashboard', {title: 'Dashboard', stylesheets: []});
+})
+/* app.get('/erd', (req, res)=>{
+    //This is a placeholder for the actual logic that will handle the dashboard
+    //We will render the dashboard page with the user data
+    res.render('./pages/dashboard', {title: 'Dashboard', stylesheets: ['dashboard.css']});
+}) */
+//ToDo: PW B3iOmNipONcIqRgr
