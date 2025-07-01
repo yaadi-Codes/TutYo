@@ -27,3 +27,8 @@ Finally, A user can login using OAuth2 for google, microsoft and apple. Any succ
    ```bash
    npm install
    ```
+4. Start the Project:
+   ```bash
+       npm run dev # for development with nodemon
+       npm run start # for production
+   ```
