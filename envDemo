@@ -1,2 +1,9 @@
-DB_USER = #Create a database using MongoDB Atlas and copy the user name
-DB_PASS = #user password
+# MongoDB Atlas credentials
+DB_USER=your-mongodb-username   # Replace with your MongoDB Atlas username
+DB_PASS=your-mongodb-password   # Replace with your MongoDB Atlas password
+
+# JWT secret key
+JWT_SECRET=yourJWTsecret123     # Recommended: 10–13+ character random string
+
+# Server port
+PORT=3000                       # Change if needed3

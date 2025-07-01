@@ -4,6 +4,8 @@
   "description": "A tool to summarize, generate quizzes, provide fun facts and generate flashcards on uploaded lecture notes.",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -11,7 +13,7 @@
     "url": "git+https://github.com/yaadi-Codes/Tutyo.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Malique Edwards -- yaadi-codes",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/yaadi-Codes/Tutyo/issues"
@@ -23,9 +25,10 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mongodb": "6.17"
+    "mongodb": "^6.17"
   },
   "devDependencies": {
-    "@types/node": "^24.0.3"
+    "@types/node": "^24.0.3",
+    "nodemon": "^3.1.10"
   }
 }
