@@ -2,7 +2,9 @@
 
 //Global Variable Declarations
 const form = document.querySelector(".container-form");
-const actionInput = document.getElementById("formAction");
+const errorMsg = document.getElementById('formError'); 
+/* const actionInput = document.getElementById("formAction");
+ */
 const registerFields = document.querySelectorAll(".registerInput");
 const loginFields = document.querySelectorAll(".loginInput");
 const submissionButton = document.getElementById("submitBtn");
@@ -10,28 +12,32 @@ const switchModeLink = document.querySelector(".switchModeLink");
 const switchModeText = document.getElementById("switchModeText")
 const formTitle = document.getElementById("formTitle");
 const userType = document.getElementById("userType");
-let formMode = form.getAttribute("data-mode");
+let formMode = form.getAttribute("data-mode"); //login or register
 
 
 //function to toggle the login and register forms. Later called within an eventlistener to implement functionality
 function toggleForm() {
+    const registerViewPwToggle = document.getElementById('registerPwVButton');
+    const loginViewPwToggle = document.getElementById('loginPwVButton');
     clearAllErrorMessages(); // Clear error messages when switching modes
     formMode = formMode  === "login" ? "register" : "login";
     form.setAttribute("data-mode", formMode);
 
     // Toggle visibility of login and register fields
     loginFields.forEach((input) => {
-        input.classList.toggle("hideInputOptions");
+        input.classList.toggle("hide");
     });
     registerFields.forEach((input) => {
-        input.classList.toggle("hideInputOptions");
+        input.classList.toggle("hide");
     });
-    userType.classList.toggle("hideInputOptions");
+    userType.classList.toggle("hide");
 
-    // Update action input and UI texts based on new mode
     if (formMode === "login") {
-        actionInput.value = "login";
-
+/*         actionInput.value = "login";
+ */
+        registerViewPwToggle.classList.add('hide');
+        loginViewPwToggle.classList.remove('hide');
+        
         formTitle.innerText = "Login";
         submissionButton.innerText = "Login";
 
@@ -42,7 +48,10 @@ function toggleForm() {
         registerLink.textContent = "Sign up";
         switchModeText.appendChild(registerLink);
     } else {
-        actionInput.value = "register";
+/*         actionInput.value = "register";
+ */
+        registerViewPwToggle.classList.remove('hide');
+        loginViewPwToggle.classList.add('hide');
 
         formTitle.innerText = "Register";
         submissionButton.innerText = "Register";
@@ -60,25 +69,41 @@ function toggleForm() {
 switchModeText.addEventListener("click", (e) => {
     if (e.target && e.target.classList.contains("switchModeLink")) {
         e.preventDefault();
+        hideAllErrorMessages();
         toggleForm();
         toggleActiveFields(); 
     }
 });
 
+const registerPassword = document.getElementById('registerPassword');
+const loginPassword = document.getElementById('loginPassword');
+const toggleIcon = document.querySelectorAll('.toggle-password');
+
+//function to toggle the view of login and register password
+toggleIcon.forEach(icon =>{
+  icon.addEventListener('click', ()=>{
+    const isRegister = icon.classList.contains('register');
+    const passwordInput = isRegister ? registerPassword : loginPassword;
+
+    const isHidden = passwordInput.type === 'password';
+    passwordInput.type = isHidden ? 'text' : 'password';
+
+    icon.src = isHidden 
+      ? 'Assets/pwVisible.png'   // 👁️ show password
+      : 'Assets/pwInvisible.png'; // 🙈 hide password
+
+  })
+});
+
 //Form Validation Section 
 //Variables used going forward'
 const rememberMe = document.querySelector('input[name="rememberMe"]');
-const errorMsg = document.getElementById('formError'); 
 let errors = form.querySelectorAll(".error");
 
 function hideAllErrorMessages() {
     errors.forEach((error) => {
+        error.classList.remove('show');
         error.classList.add("hide"); //Hide all error messages initially
-    });
-};
-function showAllErrorMessages() {
-    errors.forEach((error) => {
-        error.classList.remove("hide"); //Show all error messages
     });
 };
 function clearAllErrorMessages() {
@@ -87,9 +112,26 @@ function clearAllErrorMessages() {
         error.classList.add("hide"); //Hide the error messages
     })
 };
+function showLoginErrors(){
+  errors.forEach((error)=>{
+    if((error.classList.contains('login-error') || error.classList.contains('main-error')) && error.innerHTML != ""){
+      error.classList.remove('hide');
+      error.classList.add('show');
+    }
+  })
+}
+function showRegisterErrors(){
+  errors.forEach((error)=>{
+    if((error.classList.contains('register-error') || error.classList.contains('main-error')) && error.innerHTML != ""){
+      error.classList.remove('hide');
+      error.classList.add('show');
+    }
+  })
+}
 function setError(errorElement, message) {
     errorElement.textContent = message;
 }
+
 
 //if any input field is focused, hide the error messages
 form.addEventListener("focusin", (e) => {
@@ -116,7 +158,7 @@ function validateForm() {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const usernamePattern = /^[a-zA-Z0-9_-]{3,20}$/;
   const namePattern = /^[a-zA-Z]+(?:[-\s][a-zA-Z]+)*$/;
-  const strongPasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+  const strongPasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&?*]).{8,}$/;
   let isValid = true;
   clearAllErrorMessages();//Once this function is called, all error messages must be cleared to make space for possible new errors
 
@@ -128,18 +170,18 @@ function validateForm() {
     const passwordErrMsg = document.getElementById('loginPasswordError');
 
     if (userOrEmail.value.trim() === "") {
-      setError(userOrEmailErrMsg, "Username or Email is required.");
+      setError(userOrEmailErrMsg, "⚠️ Please enter your username or email.");
       isValid = false;
     }
 
     if (password.value.trim() === "") {
-      setError(passwordErrMsg, "Password is required.");
+      setError(passwordErrMsg, "🔒 Please enter your password to log in.");
       isValid = false;
     }
 
     if (!isValid) {
-      errorMsg.textContent = "Some fields are missing or invalid. Please check your input.";
-      showAllErrorMessages();
+      errorMsg.textContent = "❌ Unable to log you in. Please check the fields below and try again.";
+      showLoginErrors();
     }
     return isValid;
   }else if(formMode === 'register') {
@@ -161,68 +203,68 @@ function validateForm() {
 
     // First name
     if (firstName.value.trim() === "") {
-      setError(fNameError, "First name is required.");
+      setError(fNameError, "📝 Please enter your first name..");
       isValid = false;
     } else if (!namePattern.test(firstName.value.trim())) {
-      setError(fNameError, "Enter a valid first name.");
+      setError(fNameError, "🚫 First name must contain only letters, spaces, or hyphens.");
       isValid = false;
     }
 
     // Last name
     if (lastName.value.trim() === "") {
-      setError(lNameError, "Last name is required.");
+      setError(lNameError, "📝 Please enter your last name.");
       isValid = false;
     } else if (!namePattern.test(lastName.value.trim())) {
-      setError(lNameError, "Enter a valid last name.");
+      setError(lNameError, "🚫 Last name must contain only letters, spaces, or hyphens.");
       isValid = false;
     }
 
     // Username
     if (username.value.trim() === "") {
-      setError(usernameError, "Username is required.");
+      setError(usernameError, "👤 Please choose a username.");
       isValid = false;
     } else if (!usernamePattern.test(username.value.trim())) {
-      setError(usernameError, "Username must be 3–20 characters (letters, numbers, underscores).");
+      setError(usernameError, "⚙️ Username must be 3–20 characters, and can include letters, numbers, underscores, or hyphens.");
       isValid = false;
     }
 
     // Email
     //ToDo: Use HunterIo API to check if email is valid in the email registry. ie. if it actually exist
     if (email.value.trim() === "") {
-      setError(emailError, "Email is required.");
+      setError(emailError, "📧 Email address is required.");
       isValid = false;
     } else if (!emailPattern.test(email.value.trim())) {
-      setError(emailError, "Enter a valid email address.");
+      setError(emailError, "❗ Please enter a valid email address (e.g., name@example.com).");
       isValid = false;
     }
 
     // Password
     if (setPassword.value.trim() === "") {
-      setError(setPassword, passwordError, "Password is required.");
+      setError(passwordError, "🔐 Create a password to continue.");
       isValid = false;
     } else if (!strongPasswordPattern.test(setPassword.value)) {
-      setError(passwordError, "Password must include uppercase, lowercase, number, and symbol.");
+      setError(passwordError, "⚠️ Password must be at least 8 characters, including uppercase, lowercase, a number, and a symbol (!@#$%^&?*).");
       isValid = false;
     }
 
     // Confirm password
     if (confirmPassword.value.trim() === "") {
-      setError(confirmPassword, passwordError, "Please confirm your password.");
+      setError(confirmPassword, passwordError, "🔄 Please re-type your password to confirm.");
       isValid = false;
     } else if (setPassword.value !== confirmPassword.value) {
-      setError(passwordError, "Passwords do not match.");
+      setError(passwordError, "❌ Passwords do not match. Please try again.");
       isValid = false;
     }
 
     // User type
     if (!userType || userType.value === "none") {
-      userTypeError.textContent = "Please select your user type.";
+      userTypeError.textContent = "👥 Select your role (e.g., Student, Teacher) before continuing.";
       isValid = false;
     }
 
     if (!isValid) {
-      errorMsg.textContent = "Some fields are missing or invalid. Please check your input.";
-      showAllErrorMessages();
+      errorMsg.textContent = "🚫 Registration Failed. Ensure all fields are filled and valid.";
+      showRegisterErrors();
     }
 
     return isValid;
@@ -286,9 +328,12 @@ async function handleFormSubmission() {
           body: jsonFormData
       })
       
+      //if an error has occurred in logging in the user will see it on the form
       if(!response.ok){
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Network response was not ok');
+        const error = new Error(errorData.message);
+        error.data = errorData;
+        throw error;
       }
       responseData = await response.json();
       //Expected responseData Structure:
@@ -321,8 +366,10 @@ async function handleFormSubmission() {
         //Update, instead of a module, we'll store a value in session storage that notes if user is logged in
 
   }catch(error) {
-        console.error('There was a problem with the fetch operation:', error);
-  };
+      errorMsg.textContent = `${formMode === 'login' ? 'Oops! We couldn’t log you in' : 'Hmm! Something went wrong with registration'}: ${error.message}`;      
+      // Debug/dev log
+      console.error(`An error occurred when trying to ${formMode}: ${error.message}`);
+  }
   return responseData;
 }
 
@@ -349,11 +396,17 @@ form.addEventListener("submit", async (e) => {
     if (validateForm()) {
       let responseData = await handleFormSubmission();
       if (responseData) {
-        sessionStorage.setItem('isLoggedIn', 'yes');
+        errorMsg.classList.add('hide');
+        const sessionData = { loggedIn: true };
+        const encoded = btoa(JSON.stringify(sessionData));
+        sessionStorage.setItem('session', encoded);
         window.location.href = '/loggedIn';
       } else {
-          handleFailure();
-          sessionStorage.setItem('isLoggedIn', 'no');
+        errorMsg.classList.remove('hide');
+        handleFailure();
+        const sessionData = { loggedIn: false };
+        const encoded = btoa(JSON.stringify(sessionData));
+        sessionStorage.setItem('session', encoded);
       }
     }
 });
@@ -363,15 +416,13 @@ form.addEventListener("submit", async (e) => {
  * me option upon lost login. If this is successful the user will be redirected to their dashboard
  * However, should this fail the localStorage and sessionStorage Variables will be cleared.
  * 
-*
-* @type {boolean} autoLoginAttempted-- tracks if auto-login attempt has already been made
 */
-//let autoLoginAttempted = false;
-if (window.location.pathname === '/loginOrRegister' /*&& !autoLoginAttempted*/){
+if (window.location.pathname === '/loginOrRegister'){
   window.addEventListener('DOMContentLoaded', () => {
-    //autoLoginAttempted = true;
-    sessionStorage.setItem('isLoggedIn', 'no');
-    (async () => {
+        const sessionData = { loggedIn: false };
+        const encoded = btoa(JSON.stringify(sessionData));
+        sessionStorage.setItem('session', encoded);
+      (async () => {
       try {
         const token = localStorage.getItem('auth_token');
         if (!token) {
@@ -390,7 +441,9 @@ if (window.location.pathname === '/loginOrRegister' /*&& !autoLoginAttempted*/){
 
         if (response.ok && data.result === 'success') {
           console.log('Auto-login successful:', data);//Debugger
-          sessionStorage.setItem('isLoggedIn', 'yes');
+          const sessionData = { loggedIn: true };
+          const encoded = btoa(JSON.stringify(sessionData));
+          sessionStorage.setItem('session', encoded);
           window.location.href = '/loggedIn';
         } else {
           await handleFailure();

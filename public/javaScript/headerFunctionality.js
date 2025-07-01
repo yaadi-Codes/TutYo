@@ -48,8 +48,7 @@ headerPageLinks.forEach(item => {
 //and set isLogin to false. This will be replaced with the
 //actual login check later
 
-let isLogin = false;
-updateHeaderLinks(isLogin);
+
 //Let's create a fucntion what will be called to update the isLogin variable
 //this function will be called from the login.js file when the user logs in and out
 
@@ -70,5 +69,24 @@ logo.addEventListener("click", () => {
     window.location.href = "index.html";
 });
 
+
+window.addEventListener('DOMContentLoaded', () => {
+    const encoded = sessionStorage.getItem('session');
+    let isLogin = false;
+
+    if(encoded){
+        try{
+            const session = JSON.parse(atob(encoded));
+            isLogin = session.loggedIn === true;
+        }catch(error){
+            console.error("Invalid session data");
+            sessionStorage.removeItem('session');
+            window.location.pathname = '/loginOrRegister';
+        }
+    }
+    
+    updateHeaderLinks(isLogin);
+
+})
 
 

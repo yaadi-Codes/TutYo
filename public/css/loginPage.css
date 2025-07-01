@@ -34,12 +34,13 @@ form h1{
     font-family: Lemonada;
     font-size: 2.5rem;
     letter-spacing: 2px;
-    padding-bottom: 30px;
+    padding-bottom: 5px;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 /*Input field style*/
 #inputFieldContainer {
+    margin-top: 35px;
     padding: 0 10%;
     display: flex;
     flex-direction:column;
@@ -52,33 +53,55 @@ input{
     font-size: .9rem;
     border-radius: 5px;
     border: none;
-    margin: 10px;
+    margin: 5px 10px;
     padding-left: 20px;
     color: var(--accent-white);
     background-color:var(--blur-black);
 }
+.password-wrapper{
+    position: relative;
+    display: flex;
+    width: 100%;
+} 
+.password-wrapper .password{
+  margin: 10px 0;
+  padding-right: 1rem;/* padding-right for space for icon */
+}
+.password-wrapper .toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+.password-wrapper .toggle-password:hover {
+  opacity: 1;
+}
 
 input::placeholder{
     color: var(--brighter-white);
-    font-family: Roboto, sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 input:focus{
-    transition: 0.5s;
+    font-family: 'Roboto', sans-serif;
+    font-size: .9rem;
     outline: none;
     background-color: var(--brighter-black);
     box-shadow: 0 0 10px var(--brighter-white);
     height: 45px;
+    transition: background-color 0.5s, box-shadow 0.5s;
 }
 input:not(.radioInput, #rememberMe):hover{
     background-color: var(--brighter-black);
-    transition: 0.5s ease-in-out;
+    transition: 0.3s background-color, 0.5s transform, 0.1s box-shadow ease-in-out;
     transform: scale(1.02);
     box-shadow: 0 0 10px var(--brighter-white);
-}
-
-.hideInputOptions{
-    display: none !important;
+    transition: 0.3s background-color, 0.5s transform, 0.1s box-shadow ease-in-out;
 }
 
 
@@ -95,13 +118,13 @@ form #userType{
     display: flex;
     align-items: center;  
 }
-#userType.hideInputOptions{
+#userType.hide{
     padding: 0px !important;
 }
 input[type="radio"]{
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 1rem;
+    height: 1rem;
     margin-right: 10px;
     cursor: pointer;
     accent-color: var(--brighter-pink);
@@ -244,5 +267,33 @@ body a:hover,
     bottom: 0;
     padding-top: 20px;
     text-align: center;
+}
+.error{
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: .4px;
+    word-spacing: 2px;
+    font-weight:500;
+    padding: 0.6em 1em;
+    border-radius: 6px;
+    color: var(--tomato);
+    background-color: var(--brighter-black);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 99, 71, 0.3);
+
+}
+.error:not(.main-error){
+    width: 100%;
+    margin-top: 1em;
+}
+#formError{
+    text-align: center;
+    padding: 1rem 1.5em;
+    width: 80%;
+    margin: 0 10% 0;
+    border: 1px solid var(--tomato);
+
 }
 

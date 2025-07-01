@@ -58,6 +58,8 @@ app.get('/loginOrRegister', (req, res)=>{
 //This is a placeholder for the actual logic that will handle the login or registration
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 app.post('/loginOrRegister', async (req, res)=>{
+    const MAX_ATTEMPTS = 5;
+
     try{
         const action = req.body.action; //This will be either 'login' or 'register'
         let collection = db.collection('login_data');
@@ -75,13 +77,33 @@ app.post('/loginOrRegister', async (req, res)=>{
                     return res.status(404).json({ result: 'fail', message: 'User not found' });
                 }
                 console.log(user);//Debugger
+                //check to see if user account is locked 
+                if(user.isLocked)return res.status(403).json({result: 'fail', message: 'Account is locked.'});
+                
+                //if account is not locked we'll proceed to verify password
+                //should the password be incorrect we'll track the errors 
+                //should an incorrect password be entered 5 times in succession 
+                //the account will be closed. Else if password is correct we'll 
+                //set the counter to 0
+                let loginAttempt = parseInt(user.failedLoginAttempt);//store current amount of failed attempts
 
                 try {
                     const ispasswordValid = await bcrypt.compare(password, user.password);
                     //If the password is valid, we will return a success response
                     //If the password is invalid, we will return an error response
-                    if(!ispasswordValid) return res.status(401).json({ result: 'fail', message: 'Invalid password' });
+                    if(!ispasswordValid){
+                        loginAttempt++;
+                        if(loginAttempt >= MAX_ATTEMPTS){
+                            await collection.updateOne({[identifierType]: identifier}, {$set: {isLocked: true}});
+                            return res.status(403).json({result: 'fail', message: 'Account is locked.'});
+                        }
+                        await collection.updateOne({[identifierType]: identifier}, {$set: {failedLoginAttempt: loginAttempt}});
+                        return res.status(401).json({ result: 'fail', message: 'Invalid password' });
+
+                    }
                     //else
+                    loginAttempt = 0;
+                    await collection.updateOne({[identifierType]: identifier}, {$set: {failedLoginAttempt: loginAttempt}});
                     const token = jwt.sign(
                         {
                             id: user._id,
@@ -97,6 +119,7 @@ app.post('/loginOrRegister', async (req, res)=>{
                         secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
                         sameSite: 'Strict', // Prevent CSRF attacks
                     }) */
+                   console.log(user);//Debugger
                     return res.status(200).json({
                         result: 'success',
                         message: 'Login Successful',
@@ -128,6 +151,7 @@ app.post('/loginOrRegister', async (req, res)=>{
                 try{
                     const hashedPassword = await bcrypt.hash(registeredPassword, 12);
                     data.password = hashedPassword; //Store the hashed password
+                    data.failedLoginAttempt = 0;
                 }catch(err){
                         console.error('Error hashing password:', err);
                         return res.status(500).json({ result: 'fail', message: 'Internal server error' });

@@ -10,9 +10,12 @@
     --blur-white: rgba(255, 255, 255, 0.4);
      --blur-blue: rgba(30, 144, 255, 0.4);
     --blur-pink: rgba(255, 105, 180, 0.4);
-    --brighter-black: rgba(0, 0, 0, 0.8);
+    --brighter-black: rgba(0, 0, 0, 0.6);
     --brighter-white: rgba(255, 255, 255, 0.8);
     --brighter-pink: rgba(255, 105, 180, 0.8);
+    --tomato: rgb(255, 99, 71);
+    --crimson: #DC143C;
+    --bright-red:#FF0000;
 }
 *{
     margin: 0;

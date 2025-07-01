@@ -9,49 +9,56 @@
             <input type="hidden" name="action" id="formAction" value="login">
 
             <h1 id="formTitle">LOGIN</h1> <!--Subjected to change--- change to Register-->
+            <div class="main-error error hide" id="formError"></div>
+            
             <!--container to hold the input boxes-->
-            <div class="error" id="formError"></div>
-
             <div id="inputFieldContainer">
                 <!--Register Input Field-->
-                <div class="error" id="fNameError"></div>
-                <input type = "text" name="firstName" placeholder="first name" class="registerInput hideInputOptions" autocomplete="name"> 
+                <div class="register-error error hide" id="fNameError"></div>
+                <input type = "text" name="firstName" placeholder="first name" class="registerInput hide"> 
                 
-                <div class="error" id="lNameError"></div>
-                <input type = "text" name="lastName" placeholder="last name" class="registerInput hideInputOptions" autocomplete="name" >
+                <div class="register-error error hide" id="lNameError"></div>
+                <input type = "text" name="lastName" placeholder="last name" class="registerInput hide">
                 
-                <div class="error" id="usernameError"></div>
-                <input type = "text"  name="username" placeholder="username" class="registerInput hideInputOptions" autocomplete="username" >
+                <div class="register-error error hide" id="usernameError"></div>
+                <input type = "text"  name="username" placeholder="username" class="registerInput hide">
                 
-                <div class="error" id="emailError"></div>
-                <input type = "text" name="email" placeholder="email" class="registerInput hideInputOptions" autocomplete="email" >
+                <div class="register-error error hide" id="emailError"></div>
+                <input type = "text" name="email" placeholder="email" class="registerInput hide">
                 
-                <div class="error" id="registerPasswordError"></div>
-                <input type = "password" name="setPassword" placeholder="password" class="registerInput hideInputOptions" autocomplete="off" >
-                <input type = "password" name="confirmPassword" placeholder="confirm password" class="registerInput hideInputOptions" autocomplete="off" >
+                <div class="register-error error hide" id="registerPasswordError"></div>
+                <div class = 'password-wrapper'>
+                    <input type = "password" name="setPassword" placeholder="password" class="registerInput password hide" id="registerPassword">
+                    <img src="/Assets/pwInvisible.png" alt="icon to hide password" id="registerPwVButton" class="toggle-password register hide">
+                </div>
+                <input type = "password" name="confirmPassword" placeholder="confirm password" class="registerInput hide">
      
                 <!--Login Input field-->
-                <div class="error" id="usernameOrEmailError"></div>
-                <input type="text" name="userOrEmail" placeholder="email/username" class="loginInput" autocomplete="on" >
+                <div class="login-error error hide" id="usernameOrEmailError"></div>
+                <input type="text" name="userOrEmail" placeholder="email/username" class="loginInput">
                 
-                <div class="error" id="loginPasswordError"></div>   
-                <input type="password" name="password" placeholder="password" class="loginInput" >
+                <div class="login-error error hide" id="loginPasswordError"></div>   
+                <div class = 'password-wrapper'>
+                    <input type="password" name="password" placeholder="password" class="loginInput password" id="loginPassword">
+                    <img src="/Assets/pwInvisible.png" alt="icon to hide password" id="loginPwVButton" class="toggle-password  login">
+                </div>
+                
                 
 
-                <div class="error" id="userTypeError"></div>
+                <div class="register-error error hide" id="userTypeError"></div>
                 <!--Register Radio Options-->
-                <div id="userType" class="hideInputOptions">
-                    <label for="studentRadio" class="registerInput hideInputOptions">
+                <div id="userType" class="hide">
+                    <label for="studentRadio" class="registerInput hide">
                         <input type = "radio" id="studentRadio" name="userType" value="student" class="radioInput">
                         Student
                     </label>
 
-                    <label for="teacherRadio"  class="registerInput hideInputOptions">
+                    <label for="teacherRadio"  class="registerInput hide">
                         <input type = "radio" id="teacherRadio" name="userType" value="teacher" class="radioInput">
                         Teacher
                     </label>
 
-                    <label for="noType" class="registerInput hideInputOptions">
+                    <label for="noType" class="registerInput hide">
                         <input type="radio" id="noType" name="userType" value="none" class="radioInput">
                         None
                     </label> 
