@@ -6,7 +6,7 @@ A tool to summarize, generate quizzes, provide fun facts and generate flashcards
 
 Login page consist of a header and a form. The header will restrict access to two navigation links - 'Dashboard', 'Profile' - until user has logged in.
 
-The page houses both the login and register view without linking to seperate pages. By clicking the 'Sign up' (Login Mode) or 'Sign in' text, the login and register view will be toggled.
+The page houses both the login and register view without linking to seperate pages. By clicking the 'Sign up' (Login Mode) or 'Sign in' (Register Mode) text, the login and register view will be toggled.
 
 Should a user who is confirmed to be registered enter an incorrect password 5 times, their account will be locked. Recovery is only possible through the Forgot Password option.
 
