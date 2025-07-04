@@ -1,5 +1,5 @@
 //connect to db
-//retrieve db connection once connectedf
+//retrieve db connection once connected
 
 const { MongoClient } = require('mongodb');
 require('dotenv').config();
@@ -32,3 +32,5 @@ module.exports = {
         }
     }
 };
+
+

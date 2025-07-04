@@ -460,6 +460,5 @@ if (window.location.pathname === '/loginOrRegister'){
 
 
 //TODO:
-//2. Handle the response from the server and show appropriate messages to the user --Halfway done
 //6. Implement the logout functionality to clear the user data from localStorage and redirect to the login page
 //9. If user choose to use google, microsoft or apple to login, we will need to implement the OAuth2.0 flow
