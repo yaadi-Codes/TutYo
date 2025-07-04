@@ -1,18 +1,30 @@
 const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcrypt');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 require('dotenv').config();
 const { getDb } = require('../databaseFiles/db'); 
 
 
+/**
+ * Serialize user by storing only their MongoDB _id in the session.
+ * @param {Object} user - The user object retrieved from the database.
+ * @param {Function} cb - Callback function to complete serialization.
+ */
 passport.serializeUser((user, cb)=>{
     cb(null, user._id);
 })
 
+/**
+ * Deserialize user by looking them up using their stored _id.
+ * @param {string} id - MongoDB _id stored in the session.
+ * @param {Function} cb - Callback function to complete deserialization.
+ */
 passport.deserializeUser(async (id, cb)=>{
     try{
         const db = getDb();
         const user = await db.collection('login_data').findOne({_id: id});
-        cb(null, id);
+        cb(null, user);
     }
     catch(err){
         cb(err, null);
@@ -20,7 +32,10 @@ passport.deserializeUser(async (id, cb)=>{
     
 })
 
-//config google strategy 
+/**
+ * Google OAuth strategy configuration.
+ * Attempts to find or create a user based on their Google profile ID.
+ */
 passport.use(new GoogleStrategy(
   {
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -28,13 +43,13 @@ passport.use(new GoogleStrategy(
     callbackURL: process.env.GOOGLE_CB_URL
   },
   async (accessToken, refreshToken, profile, cb) => {
-    console.log(JSON.stringify(profile, null, 2));
     try {
-        const db = getDb(); // ✅ Get db after connection is established
+        const db = getDb();
         const collection = db.collection('login_data');
 
         const googleId = profile.id;
 
+        // Check if user with this Google ID already exists
         let user = await collection.findOne({ googleId });
 
         if (!user) {
@@ -83,5 +98,28 @@ passport.use(new AppleStrategy(
 
     })
 ); */
+
+passport.use(new LocalStrategy(
+    {
+        usernameField: 'userOrEmail',
+        passwordField: 'password',
+    },
+    async(username, password, done) =>{
+        try {
+            const db = getDb();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            const identifierType = emailPattern.test(username) ? 'email' : 'username';
+            
+            const user = await collection.findOne({ [identifierType]: username.toLowerCase().trim() });
+            
+            if(!user) {
+                return done({ result: 'fail', message: 'User not found' });
+            }
+        } catch (error) {
+            
+        }
+    }
+))
 
 

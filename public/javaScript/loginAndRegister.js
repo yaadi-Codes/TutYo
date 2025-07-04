@@ -318,7 +318,6 @@ async function handleFormSubmission() {
     //Send the data to the server using fetch API where 
     //the server will handle the login or registration after receiving the data
     //ToDo: Make the following code into an async function awaiting the response from the server before proceeding
-    console.log("Form Data to be sent:", jsonFormData); //For debugging purposes
     try{
       const response = await fetch('/loginOrRegister', {
           method: 'POST',
@@ -336,19 +335,18 @@ async function handleFormSubmission() {
         throw error;
       }
       responseData = await response.json();
-      //Expected responseData Structure:
-        //result: success,
-        //message: 'Login Successful',
-        //token: token,
-        //user: {
-          //  id: user._id,
-          //  username: user.username,
-        //}  
-      console.log("Response from server:", responseData); //For debugging purposes
+        /* Expected responseData Structure:
+          result: success,
+          message: 'Login Successful',
+          token: token,
+          user: {
+          id: user._id,
+          username: user.username,
+        } */  
         
-      /*if the response is okay, were going to store the response in a variable
-      **we will then check if the user chose to be remembered, if they were we will store the user data in localStorage
-      **if not we store in the sessionStorage
+      /** if the response is okay, were going to store the response in a variable
+       * we will then check if the user chose to be remembered, if they were we will store the user data in localStorage
+       * if not we store in the sessionStorage
       */
         if (isRememberMeChecked) {
           localStorage.setItem('auth_token', responseData.token);
@@ -382,6 +380,8 @@ async function handleFailure() {
   sessionStorage.removeItem('auth_token');
   sessionStorage.removeItem('username');
   sessionStorage.removeItem('user_id');
+
+  updateLoginSession(false);
 }
 //ToDo: Handle the form submission and send the data to the server for backend processing
 /**
@@ -393,36 +393,52 @@ async function handleFailure() {
  */
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    // Ensure required fields are valid before submitting
     if (validateForm()) {
       let responseData = await handleFormSubmission();
+
       if (responseData) {
+        // Login/register was successful
         errorMsg.classList.add('hide');
-        const sessionData = { loggedIn: true };
-        const encoded = btoa(JSON.stringify(sessionData));
-        sessionStorage.setItem('session', encoded);
-        window.location.href = '/loggedIn';
+
+        if(formMode === 'login'){
+          updateLoginSession(true);
+          window.location.href = '/loggedIn';// Redirect to dashboard
+        } else toggleForm();  // Switch back to login form after registration
+
       } else {
+        // Backend responded with failure
         errorMsg.classList.remove('hide');
         handleFailure();
-        const sessionData = { loggedIn: false };
-        const encoded = btoa(JSON.stringify(sessionData));
-        sessionStorage.setItem('session', encoded);
+        updateLoginSession(false);
+
       }
     }
 });
 
-/** 
- * The function below is used to automate a login process should the client had selected remember
- * me option upon lost login. If this is successful the user will be redirected to their dashboard
- * However, should this fail the localStorage and sessionStorage Variables will be cleared.
+/**
+ * This script runs only on the /loginOrRegister page.
  * 
-*/
+ * It:
+ *  - Initializes the session state to logged out.
+ *  - Handles OAuth failure cases (e.g., if the user cancelled Google login).
+ *  - Attempts an automatic login if the "remember me" option was used previously.
+ * 
+ * If auto-login fails, both localStorage and sessionStorage are cleared, and the fallback login
+ * UI is shown to the user.
+ */
 if (window.location.pathname === '/loginOrRegister'){
-  window.addEventListener('DOMContentLoaded', () => {
-        const sessionData = { loggedIn: false };
-        const encoded = btoa(JSON.stringify(sessionData));
-        sessionStorage.setItem('session', encoded);
-      (async () => {
+ window.addEventListener('DOMContentLoaded', () => {
+
+     // Handle failed or successful OAuth logins (e.g., Google, Microsoft, Apple)
+    updateLoginSession(false);
+    
+    // Handle failed OAuth logins (e.g., Google, Microsoft, Apple)
+    handleOAuthResults();
+  
+    // Attempt auto-login if an auth token exists
+    (async () => {
       try {
         const token = localStorage.getItem('auth_token');
         if (!token) {
@@ -440,22 +456,58 @@ if (window.location.pathname === '/loginOrRegister'){
         const data = await response.json();
 
         if (response.ok && data.result === 'success') {
-          console.log('Auto-login successful:', data);//Debugger
-          const sessionData = { loggedIn: true };
-          const encoded = btoa(JSON.stringify(sessionData));
-          sessionStorage.setItem('session', encoded);
+          updateLoginSession(true);
+           // Redirect to dashboard after successful auto-login
           window.location.href = '/loggedIn';
         } else {
-          await handleFailure();
+          await handleFailure();// Login attempt failed
         }
       } catch (error) {
         console.error('Unhandled error in auto-login:', error);
-        await handleFailure();
+        await handleFailure();  // Network or unexpected failure
       }
     })();
+    
 });
 }
 
+/**
+ * Detects OAuth login results from the URL query (e.g., status=access_denied),
+ * and responds appropriately. If user denied access, an error is shown and session
+ * is marked as not logged in. If granted, session is marked as logged in.
+ */
+
+function handleOAuthResults(){
+  const urlParams = new URLSearchParams(window.location.search);
+  const status = urlParams.get('status');
+  
+
+  if (status === 'access_denied') {
+    updateLoginSession(false);
+    if (errorMsg) {
+      errorMsg.textContent = 'Google login was cancelled. Please use the regular login instead.';
+      showLoginErrors();
+    }
+
+    // Clean up the URL to remove the error message after handling
+    const cleanUrl = window.location.origin + window.location.pathname;
+    window.history.replaceState({}, document.title, cleanUrl);
+  }else if(status === 'access_granted'){
+    updateLoginSession(true);
+    window.location.href = '/loggedIn';
+  }
+}
+
+/**
+ * Encodes the login session status and stores it in sessionStorage.
+ * 
+ * @param {boolean} session - Whether the user is logged in or not
+ */
+function updateLoginSession(session){
+  const sessionData = { loggedIn: session };
+  const encoded = btoa(JSON.stringify(sessionData));
+  sessionStorage.setItem('session', encoded);
+}
 
 
 
