@@ -1,20 +1,20 @@
 # TutYo
 
-A tool to summarize, generate quizzes, provide fun facts and generate flashcards on uploaded lecture notes.
+A tool to summarize, generate quizzes, provide fun facts, and generate flashcards on uploaded lecture notes.
 
 # Login or Register Page
 
-Login page consist of a header and a form. The header will restrict access to two navigation links - 'Dashboard', 'Profile' - until user has logged in.
+The login page consists of a header and a form. The header will restrict access to two navigation links - 'Dashboard', 'Profile' - until the user has logged in.
 
-The page houses both the login and register view without linking to seperate pages. By clicking the 'Sign up' (Login Mode) or 'Sign in' text, the login and register view will be toggled.
+The page houses both the login and register views without linking to separate pages. By clicking the 'Sign up' (Login Mode) or 'Sign in' (Register Mode) text, the login and register views will be toggled.
 
-Should a user who is confirmed to be registered enter an incorrect password 5 times, their account will be locked. Recovery is only possible through the Forgot Password option.
+If a user who has been confirmed as registered enters an incorrect password five times, their account will be locked. Recovery is only possible through the Forgot Password option.
 
-Error messages will be shown, in keeping with friendly UX/UI principles to ensure users know when something has went wrong and what exactly that something is.
+Error messages will be shown, in keeping with friendly UX/UI principles, to ensure users know when something has gone wrong and what exactly that something is.
 
-Once the loginOrRegister page is loaded, a login token will be checked for, which is encrypted and stored on the LocalStorage when a user clicks 'Remember me' on successful log in.
+Once the loginOrRegister page is loaded, a login token will be checked for, which is encrypted and stored on LocalStorage when a user clicks 'Remember me' on successful log in.
 
-Finally, A user can login using OAuth2 for google, microsoft and apple. Any successful login will result in user being redirected to their account Dashboard.
+Finally, A user can login using OAuth2 for google, Microsoft, and apple. Any successful login will result in the user being redirected to their account Dashboard.
 
 ## 🔧 Setup Instructions
 
