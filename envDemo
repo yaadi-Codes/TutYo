@@ -6,4 +6,20 @@ DB_PASS=your-mongodb-password   # Replace with your MongoDB Atlas password
 JWT_SECRET=yourJWTsecret123     # Recommended: 10–13+ character random string
 
 # Server port
-PORT=3000                       # Change if needed3
+PORT=3000                       # Change if needed
+
+#passport tokens
+GOOGLE_CLIENT_ID =              #Replace with google client id
+GOOGLE_CLIENT_SECRET =          #Replace with google client secret
+GOOGLE_CB_URL = '/auth/google/redirect'
+
+MICROSOFT_CLIENT_ID = 
+MICROSOFT_CLIENT_SECRET = 
+MICROSOFT_CB_URL =
+
+APPLE_CLIENT_ID = 
+APPLE_CLIENT_SECRET = 
+APPLE_CB_URL =
+
+#cookie session key
+COOKIE_KEY =                     #create a session key
